@@ -1,0 +1,40 @@
+name: architecture_test2
+project: deep-learning-space-weather-forecasting
+program: solar_flux_time_series_forecasting.py
+command: 
+  - ${env}
+  - /usr/bin/python3
+  - ${program}
+  - ${args}
+method: grid
+metric:
+  goal: minimize
+  name: NBEATS_VALID MSE
+parameters:
+  nb_stacks:
+    distribution: categorical
+    values: [2, 5, 15, 30]
+  nb_blocks_per_stack:
+    distribution: categorical
+    values: [1, 3]
+  width:
+    distribution: categorical
+    values: [64, 128, 256, 512]
+  share_weights_in_stack:
+    distribution: categorical
+    values: [False]
+  seed:
+    distribution: categorical
+    values: [73122012649]
+  horizon:
+    distribution: categorical
+    values: [27]
+  lookback_hfactor:
+    distribution: categorical
+    values: ["2H"]
+  batch_size:
+    distribution: categorical
+    values: ["max"]
+  epochs:
+    distribution: categorical
+    values: [10]

@@ -1,0 +1,25 @@
+name: ensembleH21H27
+project: deep-learning-space-weather-forecasting
+program: solar_flux_time_series_forecasting.py
+command: 
+  - ${env}
+  - /usr/bin/python3
+  - ${program}
+  - ${args}
+method: grid
+metric:
+  name: NBEATS_VALID MSE
+  goal: minimize
+parameters:
+  horizon:
+    distribution: categorical
+    values: [21, 27]
+  lookback_hfactor:
+    distribution: categorical
+    values: ["1H", "2H", "3H", "4H", "5H", "6H"]
+  loss_func:
+    distribution: categorical
+    values: ["mase", "mape", "mse"]
+  seed:
+    distribution: categorical
+    values: [103115806466, 101398262654, 497060607312, 265451006411, 73122012649]
